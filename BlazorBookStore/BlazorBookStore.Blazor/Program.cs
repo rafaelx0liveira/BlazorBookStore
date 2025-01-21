@@ -1,10 +1,15 @@
 using BlazorBookStore.Blazor.Components;
+using BlazorBookStore.CrossCutting.DependenciesApp;
+using BlazorBookStore.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Registering services
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
