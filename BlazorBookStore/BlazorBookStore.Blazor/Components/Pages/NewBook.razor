@@ -1,0 +1,23 @@
+﻿@page "/newbook"
+
+<PageTitle>Novo Livro</PageTitle>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <BookForm EditMode="false" OnValidateBookSubmit="AdicionarLivro" />
+    </div>
+</div>
+
+@code {
+    // [SupplyParameterFromForm(FormName = "NovoLivroForm")]
+    // public Livro? Livro { get; set; } 
+
+    // protected override void OnInitialized() => 
+    //     Livro ??= new Livro(0, null, null, DateTime.Now, null,Editora.Nenhuma, Categoria.Nenhuma);
+
+    private async Task AdicionarLivro(Book book)
+    {
+        await _bookRepository.AddBook(book);
+        _navigationManager.NavigateTo("/books");
+    }
+}

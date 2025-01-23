@@ -1,0 +1,48 @@
+﻿
+<div class="col-md-3 mb-3">
+    <div class="card custom-card">
+        <img src="@(book.Capa.StartsWith("http") ? book.Capa : $"/images/{book.Capa}")"
+             class="card-img-top custom-card-img"
+             alt="Capa">
+        <div class="card-body">
+            <h5 class="card-title">@book.Titulo</h5>
+            <p class="card-text">@book.Autor</p>
+            <p class="cart-text">@book.Editora</p>
+            <p class="card-text">Lançamento: @book.Lancamento.ToShortDateString()</p>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <a href='/editbook/@book.LivroId' class="btn btn-primary">Editar</a>
+                <button @onclick="ConfirmDialog" class="btn btn-danger">Deletar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<DialogoComponent Show="showDialog"
+OnCancel="CancelDelete"
+OnDelete="ConfirmDelete">
+    <h3 style="color:red;font-weight:bold">Confirma exclusão deste book : Id=@book.LivroId ?</h3>
+</DialogoComponent>
+
+@code {
+    private bool showDialog;
+
+    [Parameter]
+    public required Book book { get; set; }
+
+    private void ConfirmDialog()
+    {
+        showDialog = true;
+    }
+
+    private void CancelDelete()
+    {
+        showDialog = false;
+    }
+
+    private async Task ConfirmDelete()
+    {
+        await _bookRepository.DeleteBook(book.LivroId);
+        showDialog = false;
+        _navigationManager.NavigateTo("/books");
+    }
+}

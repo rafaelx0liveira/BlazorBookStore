@@ -1,0 +1,28 @@
+﻿@page "/editbook/{id:int}"
+
+<PageTitle>Editar Livro</PageTitle>
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <BookForm EditMode="true" Id="@Id" OnValidateBookSubmit="EditABook" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    // [SupplyParameterFromForm(FormName = "EditaLivroForm")]
+    // public Livro? Livro { get; set; }
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     Livro ??= await livroRepository.ObterLivro(Id);
+    // }
+
+    private async Task EditABook(Book book)
+    {
+        await _bookRepository.UpdateBook(book);
+        _navigationManager.NavigateTo("/books");
+    }
+}

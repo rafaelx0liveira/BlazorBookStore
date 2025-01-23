@@ -1,0 +1,31 @@
+﻿@page "/books"
+@attribute [StreamRendering(true)]
+
+<h3>Catálogo</h3>
+
+<p>
+    <a href="/newbook">Criar Novo Livro</a>
+</p>
+@if (books is null)
+{
+    <img src="/images/loading.gif" width="100" height="100" />
+}
+else
+{
+    <div class="row">
+        @foreach (var book in books)
+        {
+            <BooksCard @rendermode="InteractiveServer" Book="@book" />
+        }
+    </div>
+}
+
+@code {
+    IEnumerable<Book>? books;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(200);
+        books = await _bookRepository.GetAllBooks();
+    }
+} 

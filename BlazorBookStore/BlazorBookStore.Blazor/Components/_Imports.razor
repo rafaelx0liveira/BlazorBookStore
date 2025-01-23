@@ -1,5 +1,6 @@
 ﻿@using System.Net.Http
 @using System.Net.Http.Json
+@using BlazorBookStore.Domain.Abstractions
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
@@ -8,3 +9,8 @@
 @using Microsoft.JSInterop
 @using BlazorBookStore.Blazor
 @using BlazorBookStore.Blazor.Components
+@using BlazorBookStore.Domain.Entities
+@using BlazorBookStore.Domain.Enums
+
+@inject IBookRepository _bookRepository
+@inject NavigationManager _navigationManager
