@@ -98,8 +98,3 @@ A aplicação utiliza a tabela `Books` com os seguintes campos:
 
 ## Contribuindo
 Contribuições são bem-vindas! Sinta-se à vontade para fazer um fork do projeto e enviar pull requests.
-
----
-
-## Licença
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
